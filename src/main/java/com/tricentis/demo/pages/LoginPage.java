@@ -3,18 +3,44 @@ package com.tricentis.demo.pages;
 import com.aventstack.extentreports.Status;
 import com.tricentis.demo.customlisteners.CustomListeners;
 import com.tricentis.demo.utility.Utility;
-import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
+import org.openqa.selenium.support.FindBy;
 
 /**
  * Created by Jay Vaghani
  */
 public class LoginPage extends Utility {
 
-    By welcomeText = By.xpath("//h1[normalize-space()='Welcome, Please Sign In!']");
-    By emailField = By.id("Email");
-    By passwordField = By.name("Password");
-    By loginButton = By.xpath("//input[@value = 'Log in']");
-    By errorMessage = By.xpath("//div[@class = 'validation-summary-errors']");
+    @CacheLookup
+    @FindBy(xpath = "//h1[normalize-space()='Welcome, Please Sign In!']")
+    WebElement welcomeText;
+
+    //    By welcomeText = By.xpath("//h1[normalize-space()='Welcome, Please Sign In!']");
+
+    @CacheLookup
+    @FindBy(id = "Email")
+    WebElement emailField;
+
+//    By emailField = By.id("Email");
+
+    @CacheLookup
+    @FindBy(name = "Password")
+    WebElement passwordField;
+
+//    By passwordField = By.name("Password");
+
+    @CacheLookup
+    @FindBy(xpath = "//input[@value = 'Log in']")
+    WebElement loginButton;
+
+    //    By loginButton = By.xpath("//input[@value = 'Log in']");
+
+    @CacheLookup
+    @FindBy(xpath = "//div[@class = 'validation-summary-errors']")
+    WebElement errorMessage;
+
+//    By errorMessage = By.xpath("//div[@class = 'validation-summary-errors']");
 
     public String getWelcomeText() {
         String message = getTextFromElement(welcomeText);
