@@ -1,6 +1,9 @@
 package com.tricentis.demo.browserfactory;
 
 import com.tricentis.demo.propertyreader.PropertyReader;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -14,21 +17,27 @@ import java.time.Duration;
  */
 public class ManageBrowser {
 
+    private static final Logger log = LogManager.getLogger(ManageBrowser.class);
+
     public static WebDriver driver;
     private String baseUrl = PropertyReader.getInstance().getProperty("baseUrl");
     private int implicitlyWait = Integer.parseInt(PropertyReader.getInstance().getProperty("implicitlyWait"));
 
     public ManageBrowser() {
         PageFactory.initElements(driver, this);
+        PropertyConfigurator.configure(System.getProperty("user.dir") + "/src/test/java/resources/propertiesfile/log4j2.properties");
     }
 
     public void selectBrowser(String browser) {
         if (browser.equalsIgnoreCase("chrome")) {
             driver = new ChromeDriver();
+            log.info("Chrome Browser Launch......");
         } else if (browser.equalsIgnoreCase("firefox")) {
             driver = new FirefoxDriver();
-        } else if (browser.equalsIgnoreCase("ie")) {
+            log.info("Firefox Browser Launch......");
+        } else if (browser.equalsIgnoreCase("edge")) {
             driver = new InternetExplorerDriver();
+            log.info("Edge Browser Launch......");
         } else {
         }
         driver.manage().window().maximize();

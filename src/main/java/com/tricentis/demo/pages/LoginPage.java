@@ -3,6 +3,8 @@ package com.tricentis.demo.pages;
 import com.aventstack.extentreports.Status;
 import com.tricentis.demo.customlisteners.CustomListeners;
 import com.tricentis.demo.utility.Utility;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -11,6 +13,8 @@ import org.openqa.selenium.support.FindBy;
  * Created by Jay Vaghani
  */
 public class LoginPage extends Utility {
+
+    private static final Logger log = LogManager.getLogger(LoginPage.class);
 
     @CacheLookup
     @FindBy(xpath = "//h1[normalize-space()='Welcome, Please Sign In!']")
@@ -44,16 +48,19 @@ public class LoginPage extends Utility {
 
     public String getWelcomeText() {
         String message = getTextFromElement(welcomeText);
+        log.info("Getting welcome text");
         return message;
     }
 
     public void enterEmailId(String email) {
         sendTextToElement(emailField, email);
+        log.info("Enter Email " + email + " into email field " + emailField.toString());
         CustomListeners.test.log(Status.PASS, "Enter EmailId " + email);
     }
 
     public void enterPassword(String password) {
         sendTextToElement(passwordField, password);
+        log.info("Enter Password " + password + " into password field " + passwordField.toString());
         CustomListeners.test.log(Status.PASS, "Enter Password " + password);
     }
 
